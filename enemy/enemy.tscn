@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtqvqvnatk4t6"]
+
+[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_g3588"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kyha4"]
+albedo_color = Color(0.955506, 0.381652, 0.611357, 1)
+emission_enabled = true
+emission = Color(0.644663, 0.644663, 0.644663, 1)
+emission_energy_multiplier = 5.38
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_potss"]
+radius = 2.5
+
+[node name="Enemy" type="Node3D" groups=["enemy"]]
+script = ExtResource("1_g3588")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+radius = 1.0
+material = SubResource("StandardMaterial3D_kyha4")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_potss")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+unique_name_in_owner = true
+path_max_distance = 1.01
+avoidance_enabled = true
+height = 2.0
+radius = 1.0
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_agent_velocity_computed"]

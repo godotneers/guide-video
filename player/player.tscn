@@ -1,0 +1,34 @@
+[gd_scene load_steps=8 format=3 uid="uid://c6tcyhwajlf4p"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_acb4n"]
+[ext_resource type="PackedScene" uid="uid://vdvsb80m0kj6" path="res://bolt/bolt.tscn" id="2_tn8a6"]
+[ext_resource type="PackedScene" uid="uid://4kb86lxbov4v" path="res://player/visuals/mr.g.glb" id="3_mvgyj"]
+[ext_resource type="Resource" uid="uid://cniw1g6rrfh5h" path="res://input/walk_mode/move.tres" id="5_jamhw"]
+[ext_resource type="Resource" uid="uid://blm3ukvtk8a32" path="res://input/walk_mode/rotate_player.tres" id="6_1hrne"]
+[ext_resource type="Resource" uid="uid://4vuniix2m278" path="res://input/walk_mode/fire.tres" id="6_pina7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ua7xj"]
+radius = 1.38627
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_acb4n")
+movement_speed = 10.0
+bolt_scene = ExtResource("2_tn8a6")
+move = ExtResource("5_jamhw")
+rotate_player = ExtResource("6_1hrne")
+fire = ExtResource("6_pina7")
+
+[node name="mr_g" parent="." instance=ExtResource("3_mvgyj")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.23063, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27164, 0)
+shape = SubResource("SphereShape3D_ua7xj")
+
+[node name="RightHand" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.98118, 1.17324, -2.23796)
+
+[node name="LeftHand" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.00132, 1.17324, -2.23796)

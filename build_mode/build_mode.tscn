@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://k2h0ddhxo3lp"]
+
+[ext_resource type="Script" path="res://build_mode/build_mode.gd" id="1_hxr4m"]
+[ext_resource type="Resource" uid="uid://r783pb4d0mua" path="res://input/build_mode/cursor_3d.tres" id="2_8dtg0"]
+[ext_resource type="Resource" uid="uid://djym72xrnggto" path="res://input/build_mode/cursor_2d.tres" id="3_ocvfa"]
+[ext_resource type="Resource" uid="uid://v3jtinq58v05" path="res://input/build_mode/place_building.tres" id="4_i8nru"]
+[ext_resource type="Resource" uid="uid://cyty3gwqvoicm" path="res://input/build_mode/abort_placement.tres" id="5_7t1bj"]
+[ext_resource type="PackedScene" uid="uid://dumjiq8xrr47d" path="res://tower/tower.tscn" id="6_ptldm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rwjyh"]
+emission_enabled = true
+emission = Color(1, 0.26197, 0.657652, 1)
+emission_energy_multiplier = 6.48
+
+[node name="BuildMode" type="CanvasLayer"]
+visible = false
+script = ExtResource("1_hxr4m")
+cursor_3d = ExtResource("2_8dtg0")
+cursor_2d = ExtResource("3_ocvfa")
+place_building = ExtResource("4_i8nru")
+abort_placement = ExtResource("5_7t1bj")
+tower_scene = ExtResource("6_ptldm")
+
+[node name="CursorPosition" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.64003)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CursorPosition"]
+visible = false
+material = SubResource("StandardMaterial3D_rwjyh")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 1
+
+[node name="PlaceTowerButton" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Tower"
+
+[node name="BlockedLabel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = 269.0
+offset_top = 183.0
+offset_right = 309.0
+offset_bottom = 223.0
+mouse_filter = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="BlockedLabel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="BlockedLabel/MarginContainer2"]
+layout_mode = 2
+text = "Location is blocked!"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/PlaceTowerButton" to="." method="_on_place_tower_button_pressed"]

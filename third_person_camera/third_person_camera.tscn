@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://clrwimsjk1ujv"]
+
+[ext_resource type="Script" path="res://third_person_camera/third_person_camera.gd" id="1_5xkjr"]
+[ext_resource type="Resource" uid="uid://d3x1no74csjbi" path="res://input/walk_mode/tilt_camera.tres" id="2_wlgxb"]
+
+[node name="ThirdPersonCamera" type="Node3D"]
+script = ExtResource("1_5xkjr")
+tilt_camera = ExtResource("2_wlgxb")
+
+[node name="Pitch" type="SpringArm3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
+spring_length = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="Pitch"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.99436)
+current = true

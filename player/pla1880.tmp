@@ -1,0 +1,63 @@
+[gd_scene load_steps=13 format=3 uid="uid://c6tcyhwajlf4p"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_acb4n"]
+[ext_resource type="PackedScene" uid="uid://vdvsb80m0kj6" path="res://bolt/bolt.tscn" id="2_tn8a6"]
+[ext_resource type="Resource" uid="uid://mqpa8j6ph270" path="res://player/actions/walk_mode.tres" id="3_j284v"]
+[ext_resource type="PackedScene" uid="uid://4kb86lxbov4v" path="res://player/visuals/mr.g.glb" id="3_mvgyj"]
+[ext_resource type="Resource" uid="uid://cniw1g6rrfh5h" path="res://player/actions/walk_mode/move.tres" id="4_bml3j"]
+[ext_resource type="Resource" uid="uid://mxwn6f6qvfb8" path="res://player/actions/build_mode.tres" id="4_t30mj"]
+[ext_resource type="Resource" uid="uid://4vuniix2m278" path="res://player/actions/walk_mode/fire.tres" id="5_hdnvy"]
+[ext_resource type="Resource" uid="uid://d3x1no74csjbi" path="res://player/actions/walk_mode/move_camera.tres" id="6_atp42"]
+[ext_resource type="Resource" uid="uid://bu5xchs38fxpp" path="res://player/actions/walk_mode/to_build_mode.tres" id="7_liglx"]
+[ext_resource type="Resource" uid="uid://y7jp144887ve" path="res://player/actions/build_mode/move_overhead_camera.tres" id="8_je2jb"]
+[ext_resource type="Resource" uid="uid://2m21w38d5o2i" path="res://player/actions/build_mode/to_walk_mode.tres" id="9_7ll0j"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ua7xj"]
+radius = 1.38627
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.6386)
+script = ExtResource("1_acb4n")
+movement_speed = 10.0
+bolt_scene = ExtResource("2_tn8a6")
+walk_mode = ExtResource("3_j284v")
+build_mode = ExtResource("4_t30mj")
+move = ExtResource("4_bml3j")
+fire = ExtResource("5_hdnvy")
+move_camera = ExtResource("6_atp42")
+to_build_mode = ExtResource("7_liglx")
+move_overhead_camera = ExtResource("8_je2jb")
+to_walk_mode = ExtResource("9_7ll0j")
+
+[node name="Pitch" type="SpringArm3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
+spring_length = 5.0
+
+[node name="ThirdPersonCamera" type="Camera3D" parent="Pitch"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.99436)
+current = true
+
+[node name="mr_g" parent="." instance=ExtResource("3_mvgyj")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.23063, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27164, 0)
+shape = SubResource("SphereShape3D_ua7xj")
+
+[node name="RightHand" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.98118, 1.17324, -1.1487)
+
+[node name="LeftHand" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.00132, 1.17324, -1.1487)
+
+[node name="OverheadCameraPivot" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
+
+[node name="OverheadCamera" type="Camera3D" parent="OverheadCameraPivot"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)

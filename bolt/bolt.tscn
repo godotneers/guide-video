@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://vdvsb80m0kj6"]
+
+[ext_resource type="Script" path="res://bolt/bolt.gd" id="1_cw1fd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_asd08"]
+albedo_color = Color(4.42803e-06, 0.751057, 0.999294, 1)
+emission_enabled = true
+emission = Color(0.362224, 0.799406, 1, 1)
+emission_energy_multiplier = 8.73
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_13pwc"]
+
+[node name="Bolt" type="Node3D"]
+script = ExtResource("1_cw1fd")
+speed = 50.0
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+material_override = SubResource("StandardMaterial3D_asd08")
+cast_shadow = 0
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGCombiner3D"]
+radius = 0.3
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.457104)
+radius = 0.3
+height = 0.778821
+cone = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.418716, 0.769278, 1, 1)
+light_energy = 2.939
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.22168)
+collision_layer = 0
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0.115339)
+shape = SubResource("SphereShape3D_13pwc")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

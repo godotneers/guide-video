@@ -1,0 +1,97 @@
+[gd_scene load_steps=8 format=3 uid="uid://dumjiq8xrr47d"]
+
+[ext_resource type="Script" path="res://tower/tower.gd" id="1_8t3ye"]
+[ext_resource type="PackedScene" uid="uid://vdvsb80m0kj6" path="res://bolt/bolt.tscn" id="2_wj40m"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_l1m2o"]
+height = 1.1756
+radius = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qg44x"]
+radius = 23.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dw2wy"]
+transparency = 1
+albedo_color = Color(0.894118, 0, 0.482353, 0.317647)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wqm1n"]
+transparency = 1
+albedo_color = Color(0.304303, 0.475096, 0.867845, 0.317647)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_t2ql6"]
+radius = 10.0
+
+[node name="Tower" type="StaticBody3D" groups=["nav_mesh", "tower"]]
+script = ExtResource("1_8t3ye")
+bolt_scene = ExtResource("2_wj40m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68531, 0)
+shape = SubResource("CylinderShape3D_l1m2o")
+
+[node name="Cannon" type="CSGBox3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03338, 0)
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Cannon"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.428221)
+radius = 0.25
+height = 0.5
+cone = true
+
+[node name="BoltSpawnPoint" type="Marker3D" parent="Cannon"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.99527)
+
+[node name="Rod" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.603699, 0)
+radius = 0.2
+height = 1.0
+
+[node name="Base" type="CSGCylinder3D" parent="."]
+radius = 1.0
+height = 0.2
+
+[node name="EnemyDetector" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.21628, 0)
+shape = SubResource("CylinderShape3D_qg44x")
+
+[node name="PlacementAids" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="DistanceToOtherTowers" type="CSGCylinder3D" parent="PlacementAids"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+radius = 10.0
+sides = 30
+material = SubResource("StandardMaterial3D_dw2wy")
+
+[node name="FiringRange" type="CSGCylinder3D" parent="PlacementAids"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+radius = 23.0
+height = 1.0
+sides = 30
+material = SubResource("StandardMaterial3D_wqm1n")
+
+[node name="ObstacleDetector" type="Area3D" parent="PlacementAids"]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlacementAids/ObstacleDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68531, 0)
+shape = SubResource("CylinderShape3D_l1m2o")
+
+[node name="NextTowerDetector" type="Area3D" parent="PlacementAids"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlacementAids/NextTowerDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.602614, 0)
+shape = SubResource("CylinderShape3D_t2ql6")
