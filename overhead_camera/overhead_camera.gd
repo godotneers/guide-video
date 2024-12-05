@@ -1,5 +1,4 @@
 extends Node3D
-@export var move_camera:GUIDEAction
 
 @export var movement_speed:float = 20
 @export var follow:Node3D
@@ -19,9 +18,11 @@ func _process(delta):
 	if not current:
 		return
 	
+	# TODO: implement panning
+	
 	global_transform = follow.global_transform
 	
-	_offset.position += move_camera.value_axis_3d.normalized() * movement_speed * delta
+
 	
 func _refresh():
 	if not is_instance_valid(_camera_3d):

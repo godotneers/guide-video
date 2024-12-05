@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b1mt0xkw8x8bx"]
+[gd_scene load_steps=27 format=3 uid="uid://b1mt0xkw8x8bx"]
 
 [ext_resource type="PackedScene" uid="uid://conoirvjdhcuy" path="res://tree/tree.tscn" id="1_uwhke"]
 [ext_resource type="Script" path="res://world/game.gd" id="1_xlvy7"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://c6tcyhwajlf4p" path="res://player/player.tscn" id="3_b2tcc"]
 [ext_resource type="Resource" uid="uid://2m21w38d5o2i" path="res://input/build_mode/to_walk_mode.tres" id="4_tblpg"]
 [ext_resource type="Resource" uid="uid://bu5xchs38fxpp" path="res://input/walk_mode/to_build_mode.tres" id="5_cbtin"]
-[ext_resource type="PackedScene" uid="uid://dkr80d2pi0d41" path="res://addons/guide/debugger/guide_debugger.tscn" id="6_4wsxf"]
 [ext_resource type="PackedScene" uid="uid://dtqvqvnatk4t6" path="res://enemy/enemy.tscn" id="6_6lg28"]
 [ext_resource type="Script" path="res://spawner/spawner.gd" id="7_15aqk"]
 [ext_resource type="PackedScene" uid="uid://clrwimsjk1ujv" path="res://third_person_camera/third_person_camera.tscn" id="8_iy3gd"]
@@ -56,10 +55,6 @@ filter_walkable_low_height_spans = true
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_xlvy7")
-build_mode = ExtResource("2_f0ilq")
-walk_mode = ExtResource("3_23wfv")
-to_walk_mode = ExtResource("4_tblpg")
-to_build_mode = ExtResource("5_cbtin")
 
 [node name="World" type="Node3D" parent="." groups=["nav_mesh"]]
 
@@ -269,7 +264,6 @@ current = true
 
 [node name="OverheadCamera" parent="." node_paths=PackedStringArray("follow") instance=ExtResource("10_g5ifv")]
 unique_name_in_owner = true
-move_camera = ExtResource("14_cbay1")
 follow = NodePath("../Player")
 
 [node name="UI Layer" type="CanvasLayer" parent="."]
@@ -294,10 +288,6 @@ limit_to_context = ExtResource("2_f0ilq")
 
 [node name="BuildMode" parent="." instance=ExtResource("20_inbl0")]
 unique_name_in_owner = true
-
-[node name="DebugLayer" type="CanvasLayer" parent="."]
 visible = false
-
-[node name="GuideDebugger" parent="DebugLayer" instance=ExtResource("6_4wsxf")]
 
 [connection signal="building_built" from="BuildMode" to="." method="_on_build_mode_building_built"]

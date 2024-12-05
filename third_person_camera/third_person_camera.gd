@@ -1,6 +1,5 @@
 extends Node3D
 
-@export var tilt_camera:GUIDEAction
 @export var follow:Node3D
 @export var current:bool:
 	set(value):
@@ -15,12 +14,13 @@ func _ready():
 
 
 func _process(delta):
+	# TODO: implement camera tilt
+	
+	
 	# follow movements of the player
 	if is_instance_valid(follow):
 		transform = follow.transform
-		
-	# camera pitch
-	_pitch.rotation.x = clamp(_pitch.rotation.x + tilt_camera.value_axis_1d, -PI/2.0, 0.0)
+
 
 
 func _refresh():

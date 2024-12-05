@@ -1,33 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://k2h0ddhxo3lp"]
+[gd_scene load_steps=3 format=3 uid="uid://k2h0ddhxo3lp"]
 
 [ext_resource type="Script" path="res://build_mode/build_mode.gd" id="1_hxr4m"]
-[ext_resource type="Resource" uid="uid://r783pb4d0mua" path="res://input/build_mode/cursor_3d.tres" id="2_8dtg0"]
-[ext_resource type="Resource" uid="uid://djym72xrnggto" path="res://input/build_mode/cursor_2d.tres" id="3_ocvfa"]
-[ext_resource type="Resource" uid="uid://v3jtinq58v05" path="res://input/build_mode/place_building.tres" id="4_i8nru"]
-[ext_resource type="Resource" uid="uid://cyty3gwqvoicm" path="res://input/build_mode/abort_placement.tres" id="5_7t1bj"]
 [ext_resource type="PackedScene" uid="uid://dumjiq8xrr47d" path="res://tower/tower.tscn" id="6_ptldm"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rwjyh"]
-emission_enabled = true
-emission = Color(1, 0.26197, 0.657652, 1)
-emission_energy_multiplier = 6.48
-
 [node name="BuildMode" type="CanvasLayer"]
-visible = false
 script = ExtResource("1_hxr4m")
-cursor_3d = ExtResource("2_8dtg0")
-cursor_2d = ExtResource("3_ocvfa")
-place_building = ExtResource("4_i8nru")
-abort_placement = ExtResource("5_7t1bj")
 tower_scene = ExtResource("6_ptldm")
-
-[node name="CursorPosition" type="Node3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.64003)
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="CursorPosition"]
-visible = false
-material = SubResource("StandardMaterial3D_rwjyh")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
