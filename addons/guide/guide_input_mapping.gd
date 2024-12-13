@@ -105,13 +105,11 @@ func _update_state(delta:float, value_type:GUIDEAction.GUIDEActionValueType):
 	if triggered_blocked > 0:
 		# some blocker triggered which means that this cannot succeed
 		_state = GUIDETrigger.GUIDETriggerState.NONE
-		_value = Vector3.ZERO
 		return
 	
 	if triggered_implicits < _implicit_count:
 		# not all implicits triggered, which also fails this binding
 		_state = GUIDETrigger.GUIDETriggerState.NONE
-		_value = Vector3.ZERO
 		return
 	
 	if _explicit_count == 0 and _implicit_count > 0:

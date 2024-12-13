@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="GUIDEAction" load_steps=2 format=3 uid="uid://blm3ukvtk8a32"]
+[gd_resource type="Resource" script_class="GUIDEAction" load_steps=2 format=3 uid="uid://dfhxv4l3yspbh"]
 
-[ext_resource type="Script" path="res://addons/guide/guide_action.gd" id="1_wsuyy"]
+[ext_resource type="Script" path="res://addons/guide/guide_action.gd" id="1_t7wky"]
 
 [resource]
-script = ExtResource("1_wsuyy")
+script = ExtResource("1_t7wky")
 name = &""
-action_value_type = 0
+action_value_type = 1
 block_lower_priority_actions = true
 emit_as_godot_actions = false
 is_remappable = false

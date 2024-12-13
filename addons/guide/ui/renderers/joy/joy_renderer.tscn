@@ -13,24 +13,27 @@ offset_bottom = 100.0
 size_flags_horizontal = 0
 script = ExtResource("1_u7brn")
 
-[node name="Controls" type="MarginContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Controls" type="MarginContainer" parent="HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 
-[node name="Stick" type="TextureRect" parent="Controls"]
+[node name="Stick" type="TextureRect" parent="HBoxContainer/Controls"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("2_23u2k")
 stretch_mode = 4
 
-[node name="Button" type="TextureRect" parent="Controls"]
+[node name="Button" type="TextureRect" parent="HBoxContainer/Controls"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("3_7qfbp")
 stretch_mode = 4
 
-[node name="Text" type="Label" parent="Controls"]
+[node name="Text" type="Label" parent="HBoxContainer/Controls"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -41,19 +44,19 @@ text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Directions" type="MarginContainer" parent="."]
+[node name="Directions" type="MarginContainer" parent="HBoxContainer"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 
-[node name="Horizontal" type="TextureRect" parent="Directions"]
+[node name="Horizontal" type="TextureRect" parent="HBoxContainer/Directions"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("5_81uyo")
 stretch_mode = 4
 
-[node name="Vertical" type="TextureRect" parent="Directions"]
+[node name="Vertical" type="TextureRect" parent="HBoxContainer/Directions"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("6_syx8c")

@@ -15,7 +15,7 @@ func _ready():
 	# don't needlessly eat performance
 	if _pending_requests.is_empty():
 		set_process(false)
-	DirAccess.make_dir_recursive_absolute(CACHE_DIR)
+
 	
 func clear_cache():
 	var files = DirAccess.get_files_at(CACHE_DIR)
@@ -25,6 +25,7 @@ func clear_cache():
 ## Makes an icon for the given input and returns a Texture2D with the icon. Icons
 ## are cached on disk so subsequent calls for the same input will be faster.
 func make_icon(input:GUIDEInput, renderer:GUIDEIconRenderer, height_px:int) -> Texture2D:
+	DirAccess.make_dir_recursive_absolute(CACHE_DIR)
 	var cache_key = (str(height_px) + renderer.cache_key(input)).sha256_text()
 	var cache_path = "user://_guide_cache/" + cache_key + ".res"
 	if ResourceLoader.exists(cache_path):

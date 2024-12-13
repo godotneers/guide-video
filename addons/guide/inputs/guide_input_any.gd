@@ -35,16 +35,14 @@ func _input(event:InputEvent):
 	_value = Vector3.ZERO		
 
 
-func is_same_as(other:GUIDEInput):
-	return other is GUIDEInputAny and \
+func is_same_as(other:GUIDEInput) -> bool:
+	return other is GUIDEInput and \
 		other.mouse == mouse and \
 		other.joy == joy and \
-		other.keyboard == keyboard
-
+		other.keyboard == keyboard 
 
 func _editor_name() -> String:
 	return "Any Input"
-	
 	
 	
 func _editor_description() -> String:

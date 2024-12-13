@@ -8,6 +8,8 @@ extends GUIDEIconRenderer
 @onready var _mouse_side_a:Control = %MouseSideA
 @onready var _mouse_side_b:Control = %MouseSideB
 @onready var _mouse_blank:Control = %MouseBlank
+@onready var _mouse_cursor:Control = %MouseCursor
+
 
 @onready var _directions:Control = %Directions
 @onready var _left:Control = %Left
@@ -20,7 +22,10 @@ extends GUIDEIconRenderer
 
 
 func supports(input:GUIDEInput) -> bool:
-	return input is GUIDEInputMouseButton or input is GUIDEInputMouseAxis1D or input is GUIDEInputMouseAxis2D
+	return input is GUIDEInputMouseButton or \
+		input is GUIDEInputMouseAxis1D or \
+		input is GUIDEInputMouseAxis2D or \
+		input is GUIDEInputMousePosition
 	
 	
 func render(input:GUIDEInput) -> void:
@@ -72,6 +77,9 @@ func render(input:GUIDEInput) -> void:
 		
 	if input is GUIDEInputMouseAxis2D:
 		_mouse_blank.visible = true
+		
+	if input is GUIDEInputMousePosition:
+		_mouse_cursor.visible = true
 	
 	call("queue_sort")
  

@@ -9,14 +9,29 @@ extends StaticBody3D
 @onready var _bolt_spawn_point:Node3D = %BoltSpawnPoint
 @onready var _obstacle_detector:Area3D = %ObstacleDetector
 @onready var _next_tower_detector:Area3D = %NextTowerDetector
-
+@onready var _collision_shape_3d = %CollisionShape3D
 @onready var _placement_aids:Node3D = %PlacementAids
 
 var placement_mode:bool:
 	set(value):
 		placement_mode = value
 		_placement_aids.visible = placement_mode
+		_collision_shape_3d.disabled = placement_mode
 		
+
+func is_location_clear() -> bool:
+	if not placement_mode:
+		return true
+		
+	var obstacles = _obstacle_detector.get_overlapping_bodies()
+	if obstacles.any(func(it): return it != self):
+		return false
+		
+	var nearby_towers = _next_tower_detector.get_overlapping_bodies()
+	if nearby_towers.any(func(it): return it != self and it is Tower):
+		return false
+		
+	return true	
 
 var _time_since_last_shot:float = 0
 
@@ -43,19 +58,7 @@ func _process(delta):
 		_time_since_last_shot -= cooldown
 	
 	
-func is_location_clear() -> bool:
-	if not placement_mode:
-		return true
-		
-	var obstacles = _obstacle_detector.get_overlapping_bodies()
-	if obstacles.any(func(it): return it != self):
-		return false
-		
-	var nearby_towers = _next_tower_detector.get_overlapping_bodies()
-	if nearby_towers.any(func(it): return it != self and it is Tower):
-		return false
-		
-	return true	
+
 		
 		
 	

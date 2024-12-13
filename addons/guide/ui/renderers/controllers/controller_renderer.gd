@@ -107,7 +107,7 @@ func render(input:GUIDEInput) -> void:
 			JOY_AXIS_TRIGGER_LEFT:
 				_left_trigger.visible = true
 			JOY_AXIS_TRIGGER_RIGHT:
-				_left_trigger.visible = true
+				_right_trigger.visible = true
 	
 	if input is GUIDEInputJoyAxis2D:
 		# We assume that there is no input mixing horizontal and vertical

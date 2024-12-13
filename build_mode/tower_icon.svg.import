@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ca1eiagyinhl7"
-path="res://.godot/imported/guide_trigger.svg-cd87acbd491929cf49a255f8481b0b63.ctex"
+uid="uid://dlrfs2y301icq"
+path="res://.godot/imported/tower_icon.svg-5a128639dd0ca14fe035973cf886b110.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/guide/triggers/guide_trigger.svg"
-dest_files=["res://.godot/imported/guide_trigger.svg-cd87acbd491929cf49a255f8481b0b63.ctex"]
+source_file="res://build_mode/tower_icon.svg"
+dest_files=["res://.godot/imported/tower_icon.svg-5a128639dd0ca14fe035973cf886b110.ctex"]
 
 [params]
 
@@ -32,6 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=0.5
+svg/scale=1.0
 editor/scale_with_editor_scale=false
 editor/convert_colors_with_editor_theme=false

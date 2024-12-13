@@ -9,9 +9,8 @@ func _modify_input(input:Vector3, delta:float, value_type:GUIDEAction.GUIDEActio
 	var viewport = Engine.get_main_loop().root
 	var transform = viewport.canvas_transform.affine_inverse()
 	var coordinates = transform * Vector2(input.x, input.y) 
-	var output =  Vector3(coordinates.x, coordinates.y, input.z)
-	return output 
-	
+	return Vector3(coordinates.x, coordinates.y, input.z)
+
 
 func _editor_name() -> String:
 	return "Canvas coordinates"

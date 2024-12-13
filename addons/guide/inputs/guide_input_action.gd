@@ -34,7 +34,7 @@ func _end_usage():
 func _on() -> void:
 	# on is only called when the action is actually existing, so this is
 	# always not-null here
-	_value = action.get_value_axis_3d()
+	_value = action.value_axis_3d
 	
 func _off() -> void:
 	_value = Vector3.ZERO	
