@@ -1,11 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://clrwimsjk1ujv"]
+[gd_scene load_steps=2 format=3 uid="uid://clrwimsjk1ujv"]
 
 [ext_resource type="Script" path="res://third_person_camera/third_person_camera.gd" id="1_5xkjr"]
-[ext_resource type="Resource" uid="uid://ce5ruugaeulpk" path="res://input/walk_mode/rotate_camera.tres" id="2_cn3nl"]
 
 [node name="ThirdPersonCamera" type="Node3D"]
 script = ExtResource("1_5xkjr")
-rotate_camera = ExtResource("2_cn3nl")
 
 [node name="Pitch" type="SpringArm3D" parent="."]
 unique_name_in_owner = true

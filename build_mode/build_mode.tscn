@@ -1,22 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://k2h0ddhxo3lp"]
+[gd_scene load_steps=4 format=3 uid="uid://k2h0ddhxo3lp"]
 
 [ext_resource type="Script" path="res://build_mode/build_mode.gd" id="1_hxr4m"]
 [ext_resource type="Texture2D" uid="uid://dlrfs2y301icq" path="res://build_mode/tower_icon.svg" id="3_5qax3"]
-[ext_resource type="Resource" uid="uid://dxl0q7r3l4xmf" path="res://input/build_mode/select_tower.tres" id="3_s0gu0"]
-[ext_resource type="Resource" uid="uid://8ma2audrita4" path="res://input/build_mode/place_tower.tres" id="4_lfdyr"]
-[ext_resource type="Resource" uid="uid://cd28ni68dmxfr" path="res://input/build_mode/cancel_tower_placement.tres" id="5_l7c4i"]
-[ext_resource type="Resource" uid="uid://b2wx8up8wh1x0" path="res://input/build_mode/tower_position.tres" id="6_fub3j"]
 [ext_resource type="PackedScene" uid="uid://dumjiq8xrr47d" path="res://tower/tower.tscn" id="6_ptldm"]
-[ext_resource type="Resource" uid="uid://drnctubo78o26" path="res://input/build_mode/tower_position_2d.tres" id="7_d2b7g"]
 
 [node name="BuildMode" type="CanvasLayer"]
 script = ExtResource("1_hxr4m")
 tower_scene = ExtResource("6_ptldm")
-select_tower = ExtResource("3_s0gu0")
-place_tower = ExtResource("4_lfdyr")
-cancel_tower_placement = ExtResource("5_l7c4i")
-tower_position = ExtResource("6_fub3j")
-tower_position_2d = ExtResource("7_d2b7g")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15

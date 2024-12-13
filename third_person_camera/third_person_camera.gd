@@ -1,7 +1,6 @@
 class_name ThirdPersonCamera
 extends Node3D
 
-@export var rotate_camera:GUIDEAction
 @export var follow:Node3D
 @export var active:bool:
 	set(value):
@@ -16,7 +15,6 @@ func _ready():
 
 
 func _process(delta):
-	_pitch.rotation_degrees.x = clamp(_pitch.rotation_degrees.x + rotate_camera.value_axis_1d, -90, 0)
 	
 	# follow movements of the player
 	if is_instance_valid(follow):

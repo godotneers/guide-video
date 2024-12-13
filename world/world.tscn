@@ -1,20 +1,14 @@
-[gd_scene load_steps=22 format=3 uid="uid://b1mt0xkw8x8bx"]
+[gd_scene load_steps=16 format=3 uid="uid://b1mt0xkw8x8bx"]
 
 [ext_resource type="PackedScene" uid="uid://conoirvjdhcuy" path="res://tree/tree.tscn" id="1_uwhke"]
 [ext_resource type="Script" path="res://world/game.gd" id="1_xlvy7"]
-[ext_resource type="Resource" uid="uid://cbpsj0btvxc34" path="res://input/walk_mode/walk_mode.tres" id="2_7g7ly"]
 [ext_resource type="PackedScene" uid="uid://buxsxs7xnqsgd" path="res://rock/rock.blend" id="2_l7ms7"]
 [ext_resource type="PackedScene" uid="uid://c6tcyhwajlf4p" path="res://player/player.tscn" id="3_b2tcc"]
-[ext_resource type="Resource" uid="uid://cm55ocn6ar8nq" path="res://input/build_mode/build_mode.tres" id="4_ka312"]
-[ext_resource type="Resource" uid="uid://bmu40v14gxitv" path="res://input/walk_mode/switch_to_build_mode.tres" id="5_hw7ao"]
-[ext_resource type="Resource" uid="uid://dpkpr3uqk8qj1" path="res://input/build_mode/switch_to_walk_mode.tres" id="5_n2p7q"]
 [ext_resource type="PackedScene" uid="uid://dtqvqvnatk4t6" path="res://enemy/enemy.tscn" id="6_6lg28"]
-[ext_resource type="Resource" uid="uid://cp18tncpjxxj7" path="res://input/walk_mode/shoot.tres" id="6_asaw2"]
 [ext_resource type="Script" path="res://spawner/spawner.gd" id="7_15aqk"]
 [ext_resource type="PackedScene" uid="uid://clrwimsjk1ujv" path="res://third_person_camera/third_person_camera.tscn" id="8_iy3gd"]
 [ext_resource type="PackedScene" uid="uid://bipx2p3un6hej" path="res://overhead_camera/overhead_camera.tscn" id="10_g5ifv"]
 [ext_resource type="PackedScene" uid="uid://k2h0ddhxo3lp" path="res://build_mode/build_mode.tscn" id="20_inbl0"]
-[ext_resource type="PackedScene" uid="uid://dkr80d2pi0d41" path="res://addons/guide/debugger/guide_debugger.tscn" id="22_2rcom"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_giegt"]
 albedo_color = Color(0, 0.258824, 0, 1)
@@ -50,10 +44,6 @@ filter_walkable_low_height_spans = true
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_xlvy7")
-walk_mode = ExtResource("2_7g7ly")
-build_mode = ExtResource("4_ka312")
-switch_to_build_mode = ExtResource("5_hw7ao")
-switch_to_walk_mode = ExtResource("5_n2p7q")
 
 [node name="World" type="Node3D" parent="." groups=["nav_mesh"]]
 
@@ -231,7 +221,6 @@ transform = Transform3D(38.0552, 1.33697, 4.62415, -0.923079, 38.1921, -3.44577,
 
 [node name="Player" parent="." instance=ExtResource("3_b2tcc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.495)
-shoot = ExtResource("6_asaw2")
 
 [node name="Target" type="StaticBody3D" parent="." groups=["nav_mesh", "target"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.116748)
@@ -268,9 +257,5 @@ follow = NodePath("../Player")
 [node name="BuildMode" parent="." instance=ExtResource("20_inbl0")]
 unique_name_in_owner = true
 visible = false
-
-[node name="DebugLayer" type="CanvasLayer" parent="."]
-
-[node name="GuideDebugger" parent="DebugLayer" instance=ExtResource("22_2rcom")]
 
 [connection signal="building_built" from="BuildMode" to="." method="_on_build_mode_building_built"]
