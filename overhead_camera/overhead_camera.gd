@@ -7,6 +7,8 @@ extends Node3D
 	set(value):
 		active = value
 		_refresh()	
+		
+@export var move_camera:GUIDEAction		
 
 
 @onready var _camera_3d:Camera3D = %Camera3D
@@ -19,9 +21,9 @@ func _process(delta):
 	if not active:
 		return
 	
+	_offset.position += _offset.basis * move_camera.value_axis_3d * movement_speed * delta
 	
 	global_transform = follow.global_transform
-	
 	
 
 	
