@@ -1,8 +1,8 @@
 ﻿# A G.U.I.D.E to input in Godot
 
 <p align="center">
-  <a href="https://youtu.be/UwHIgAAGB0s">
-<img src="_assets/title_card.png" width="1280" alt="Transforms in Godot on YouTube Cover Image">
+  <a href="https://youtu.be/gNiiaNViaUg">
+<img src="_assets/title_card.png" width="1280" alt="A G.U.I.D.E to input in Godot on YouTube Cover Image">
 </a> 
 </p>
 
