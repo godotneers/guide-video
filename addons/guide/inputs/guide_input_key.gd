@@ -47,7 +47,7 @@ extends GUIDEInput
 
 ## Whether this input should fire if additional
 ## modifier keys are currently pressed.		
-@export var allow_additional_modifiers:bool = false:
+@export var allow_additional_modifiers:bool = true:
 	set(value):
 		if value == allow_additional_modifiers:
 			return
@@ -60,37 +60,47 @@ func _input(event:InputEvent):
 	if not event is InputEventKey:
 		return
 	
-	if event.physical_keycode != key:
-		return
+	# we start assuming the key is not pressed right now	
+	_value.x = 0.0
 	
-	if allow_additional_modifiers:
-		# At least the modifiers that are true, must match
-		if shift and not event.shift_pressed:
-			return
-			
-		if control and not event.ctrl_pressed:
+	# the key itself must be pressed
+	if not Input.is_physical_key_pressed(key):
+		return
+		
+	# every required modifier must be pressed
+	if shift and not Input.is_physical_key_pressed(KEY_SHIFT):
+		return
+		
+	if control and not Input.is_physical_key_pressed(KEY_CTRL):
+		return
+		
+	if alt and not Input.is_physical_key_pressed(KEY_ALT):
+		return
+		
+	if meta and not Input.is_physical_key_pressed(KEY_META):
+		return
+		
+	# unless additional modifiers are allowed, every
+	# unselected modifier must not be pressed
+	
+	if not allow_additional_modifiers:
+		if not shift and Input.is_physical_key_pressed(KEY_SHIFT):
 			return
 		
-		if alt and not event.alt_pressed:
-			return
-			
-		if meta and not event.meta_pressed:
-			return
-	else:		
-		# Modifiers must look EXACTLY as specified
-		if event.shift_pressed != shift:
-			return
-
-		if event.ctrl_pressed != control:
-			return
-
-		if event.alt_pressed != alt:
-			return
-
-		if event.meta_pressed != meta:
+		if not control and Input.is_physical_key_pressed(KEY_CTRL):
 			return
 		
-	_value.x = 1.0 if event.pressed else 0.0
+		if not alt and Input.is_physical_key_pressed(KEY_ALT):
+			return
+		
+		if not meta and  Input.is_physical_key_pressed(KEY_META):
+			return
+		
+	# we're still here, so all required keys are pressed and 
+	# no extra keys are pressed
+	
+	_value.x = 1.0	
+	
 
 func is_same_as(other:GUIDEInput) -> bool:
 	return other is GUIDEInputKey \

@@ -19,7 +19,10 @@ func _modify_input(input:Vector3, delta:float, value_type:GUIDEAction.GUIDEActio
 	# if we collide with nothing, no need to even try
 	if collision_mask == 0:
 		return Vector3.INF
-	
+		
+	if not input.is_finite():
+		return Vector3.INF
+			
 	var viewport = Engine.get_main_loop().root
 	var camera:Camera3D = viewport.get_camera_3d()
 	if camera == null:

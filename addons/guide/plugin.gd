@@ -4,8 +4,11 @@ const MainPanel = preload("editor/mapping_context_editor/mapping_context_editor.
 
 var _main_panel:Control
 
-func _enter_tree() -> void:
+
+func _enable_plugin():
 	add_autoload_singleton("GUIDE", "res://addons/guide/guide.gd")
+	
+func _enter_tree() -> void:
 	_main_panel = MainPanel.instantiate()
 	_main_panel.initialize(self)
 	EditorInterface.get_editor_main_screen().add_child(_main_panel)
@@ -13,11 +16,13 @@ func _enter_tree() -> void:
 	_make_visible(false)
 
 func _exit_tree() -> void:
-	remove_autoload_singleton("GUIDE")
 	if is_instance_valid(_main_panel):
 		_main_panel.queue_free()
-		
-	GUIDEInputFormatter._cleanup()
+	GUIDEInputFormatter.cleanup()
+
+func _disable_plugin():
+	remove_autoload_singleton("GUIDE")
+	
 
 func _edit(object):
 	if object is GUIDEMappingContext:

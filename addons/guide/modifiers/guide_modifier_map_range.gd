@@ -29,6 +29,9 @@ extends GUIDEModifier
 
 
 func _modify_input(input:Vector3, delta:float, value_type:GUIDEAction.GUIDEActionValueType) -> Vector3:
+	if not input.is_finite():
+		return Vector3.INF
+		
 	var x_value:float = remap(input.x, input_min, input_max, output_min, output_max)
 	var y_value:float = remap(input.y, input_min, input_max, output_min, output_max)
 	var z_value:float = remap(input.z, input_min, input_max, output_min, output_max)

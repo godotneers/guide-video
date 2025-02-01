@@ -23,6 +23,9 @@ func _begin_usage():
 
 
 func _modify_input(input:Vector3, delta:float, value_type:GUIDEAction.GUIDEActionValueType) -> Vector3:
+	if not input.is_finite():
+		input = Vector3.ZERO
+		
 	input *= scale
 	
 	if apply_delta_time:

@@ -9,6 +9,7 @@ const Utils = preload("../utils.gd")
 @export var trigger_slot_scene:PackedScene
 @export var binding_dialog_scene:PackedScene
 
+@onready var _edit_input_mapping_button:Button = %EditInputMappingButton
 @onready var _input_display = %InputDisplay
 @onready var _edit_input_button:Button = %EditInputButton
 @onready var _clear_input_button:Button = %ClearInputButton
@@ -28,6 +29,7 @@ var _mapping:GUIDEInputMapping
 func _ready():
 	_edit_input_button.icon = get_theme_icon("Edit", "EditorIcons")
 	_clear_input_button.icon = get_theme_icon("Remove", "EditorIcons")
+	_edit_input_mapping_button.icon = get_theme_icon("Tools", "EditorIcons")
 	
 	_modifiers.add_requested.connect(_on_modifiers_add_requested)
 	_modifiers.delete_requested.connect(_on_modifier_delete_requested)
@@ -291,3 +293,7 @@ func _on_modifiers_collapse_state_changed(new_state:bool):
 	
 func _on_triggers_collapse_state_changed(new_state:bool):
 	_mapping.set_meta("_guide_triggers_collapsed", new_state)
+
+
+func _on_edit_input_mapping_button_pressed():
+	EditorInterface.edit_resource(_mapping)

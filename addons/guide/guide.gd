@@ -290,6 +290,28 @@ func _update_caches():
 				for trigger:GUIDETrigger in input_mapping.triggers:
 					if trigger is GUIDETriggerChordedAction and trigger.action != null:
 						chorded_actions.add(trigger.action)
+						
+			# Now the action that has a chorded action (A) needs to make sure that
+			# the chorded action it depends upon (B) is not blocked (otherwise A would 
+			# never trigger) and if that chorded action (B) in turn depends on chorded actions. So 
+			# if chorded actions build a chain, we need to keep the full
+			# chain unblocked. In addition we need to add the inputs of all
+			# these chorded actions to the list of blocked inputs.
+			for j:int in range(i+1, _active_action_mappings.size()):
+				var inner_mapping = _active_action_mappings[j]
+				# this is a chorded action that is used by one other action
+				# in the chain.
+				if chorded_actions.has(inner_mapping.action):
+					for input_mapping:GUIDEInputMapping in inner_mapping.input_mappings:
+						# put all of its inputs into the list of blocked inputs
+						if input_mapping.input != null:
+							inputs.add(input_mapping.input)
+			
+						# also if this mapping in turn again depends on a chorded
+						# action, ad this one to the list of chorded actions
+						for trigger:GUIDETrigger in input_mapping.triggers:
+							if trigger is GUIDETriggerChordedAction and trigger.action != null:
+								chorded_actions.add(trigger.action)
 			
 			# now find lower priority actions that share input
 			for j:int in range(i+1, _active_action_mappings.size()):

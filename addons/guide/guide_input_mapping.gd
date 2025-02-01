@@ -4,6 +4,46 @@
 class_name GUIDEInputMapping
 extends Resource
 
+## Whether the remapping configuration in this input mapping
+## should override the configuration of the bound action. Enable
+## this, to give a key a custom name or category for remapping.
+@export var override_action_settings:bool = false:
+	set(value):
+		if override_action_settings == value:
+			return
+		override_action_settings = value
+		emit_changed()
+
+## If true, players can remap this input mapping. Note that the 
+## action to which this input is bound also needs to be remappable
+## for this setting to have an effect.
+@export var is_remappable:bool = false:
+	set(value):
+		if is_remappable == value:
+			return
+		is_remappable = value
+		emit_changed()
+		
+## The display name of the input mapping shown to the player. If empty,
+## the display name of the action is used.
+@export var display_name:String = "":
+	set(value):
+		if display_name == value:
+			return
+		display_name = value
+		emit_changed()
+
+## The display category of the input mapping. If empty, the display name of the
+## action is used.
+@export var display_category:String = "":
+	set(value):
+		if display_category == value:
+			return
+		display_category = value
+		emit_changed()
+		
+
+@export_group("Mappings")
 ## The input to be actuated
 @export var input:GUIDEInput:
 	set(value):

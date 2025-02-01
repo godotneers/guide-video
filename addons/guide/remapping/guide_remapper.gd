@@ -40,26 +40,85 @@ func remove_custom_data(key:Variant) -> void:
 	_remapping_config.custom_data.erase(key)
 	
 	
-## Returns all remappable items. Can be filtered by context and display category.
-func get_remappable_items(context:GUIDEMappingContext = null, display_category:String = "") -> Array[ConfigItem]:
+## Returns all remappable items. Can be filtered by context, display category or
+## action.
+func get_remappable_items(context:GUIDEMappingContext = null, 
+		display_category:String = "",
+		action:GUIDEAction = null) -> Array[ConfigItem]:
+	
+	if action != null and not action.is_remappable:
+		push_warning("Action filter was set but filtered action is not remappable.")
+		return []
+		
+	
 	var result:Array[ConfigItem] = []
 	for a_context:GUIDEMappingContext in _mapping_contexts:
 		if context != null and context != a_context:
 			continue
 		for action_mapping:GUIDEActionMapping in a_context.mappings:
-			var action:GUIDEAction = action_mapping.action
-			if not action.is_remappable:
+			var mapped_action:GUIDEAction = action_mapping.action
+			# filter non-remappable actions
+			if not mapped_action.is_remappable:
 				continue
 			
-			if display_category.length() > 0 and action.display_category != display_category:
+			# if action filter is set, only pick mappings for this action
+			if action != null and action != mapped_action:
 				continue
 			
+			# make config items
 			for index:int in action_mapping.input_mappings.size():
-				var item = ConfigItem.new(a_context, action_mapping.action, index)
+				var input_mapping:GUIDEInputMapping = action_mapping.input_mappings[index]
+				if input_mapping.override_action_settings and not input_mapping.is_remappable:
+					# skip non-remappable items
+					continue
+				
+				# Calculate effective display category
+				var effective_display_category:String = \
+					_get_effective_display_category(mapped_action, input_mapping)
+
+				# if display category filter is set, only pick mappings 
+				# in this category
+				if display_category.length() > 0 and effective_display_category != display_category:
+					continue		
+				
+				var item = ConfigItem.new(a_context, action_mapping.action, index, input_mapping)
 				item_changed.connect(item._item_changed)
 				result.append(item)
 		
 	return result
+	
+	
+static func _get_effective_display_category(action:GUIDEAction, input_mapping:GUIDEInputMapping) -> String:
+	var result:String = ""
+	if input_mapping.override_action_settings:
+		result = input_mapping.display_category
+		
+	if result.is_empty():
+		result = action.display_category
+	
+	return result
+	
+
+static func _get_effective_display_name(action:GUIDEAction, input_mapping:GUIDEInputMapping) -> String:
+	var result:String = ""
+	if input_mapping.override_action_settings:
+		result = input_mapping.display_name
+		
+	if result.is_empty():
+		result = action.display_name
+	
+	return result
+	
+static func _is_effectively_remappable(action:GUIDEAction, input_mapping:GUIDEInputMapping) -> bool:
+	return action.is_remappable and ((not input_mapping.override_action_settings) or input_mapping.is_remappable)
+		
+
+static func _get_effective_value_type(action:GUIDEAction, input_mapping:GUIDEInputMapping) -> GUIDEAction.GUIDEActionValueType:
+	if input_mapping.override_action_settings and input_mapping.input != null:
+		return input_mapping.input._native_value_type()
+		
+	return action.action_value_type
+		
 
 ## Returns a list of all collisions in all contexts when this new input would be applied to the config item.
 func get_input_collisions(item:ConfigItem, input:GUIDEInput) -> Array[ConfigItem]:
@@ -80,14 +139,15 @@ func get_input_collisions(item:ConfigItem, input:GUIDEInput) -> Array[ConfigItem
 					# collisions with self are allowed
 					continue
 
-				var bound_input:GUIDEInput = action_mapping.input_mappings[index].input
+				var input_mapping:GUIDEInputMapping = action_mapping.input_mappings[index]
+				var bound_input:GUIDEInput = input_mapping.input
 				# check if this is currently overridden
 				if _remapping_config._has(context, action, index):
 					bound_input = _remapping_config._get_bound_input_or_null(context, action, index)
 					
 				# We have a collision	
-				if bound_input != null and bound_input.is_same_as(input):	
-					var collision_item := ConfigItem.new(context, action, index)
+				if bound_input != null and bound_input.is_same_as(input):
+					var collision_item := ConfigItem.new(context, action, index, input_mapping)
 					item_changed.connect(collision_item._item_changed)
 					result.append(collision_item)
 
@@ -206,15 +266,36 @@ class ConfigItem:
 	## Emitted when the input to this item has changed.
 	signal changed(input:GUIDEInput)
 	
+	var _input_mapping:GUIDEInputMapping
+	
+	## The display category for this config item
+	var display_category:String:
+		get: return GUIDERemapper._get_effective_display_category(action, _input_mapping)
+	
+	## The display name for this config item.
+	var display_name:String:
+		get: return GUIDERemapper._get_effective_display_name(action, _input_mapping)
+		
+	## Whether this item is remappable.
+	var is_remappable:bool:
+		get: return GUIDERemapper._is_effectively_remappable(action, _input_mapping)
+		
+	## The value type for this config item.
+	var value_type:GUIDEAction.GUIDEActionValueType:
+		get: return GUIDERemapper._get_effective_value_type(action, _input_mapping)
+	
 	var context:GUIDEMappingContext	
 	var action:GUIDEAction
 	var index:int
 	
-	func _init(context:GUIDEMappingContext, action:GUIDEAction, index:int):
+	func _init(context:GUIDEMappingContext, action:GUIDEAction, index:int, input_mapping:GUIDEInputMapping):
 		self.context = context
 		self.action = action
 		self.index = index
-		
+		_input_mapping = input_mapping
+	
+	## Checks whether this config item is the same as some other
+	## e.g. refers to the same input mapping.	
 	func is_same_as(other:ConfigItem) -> bool:
 		return context == other.context and \
 				action == other.action and \

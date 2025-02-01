@@ -32,6 +32,9 @@ func _modify_input(input:Vector3, delta:float, value_type:GUIDEAction.GUIDEActio
 	if upper_threshold <= lower_threshold:
 		return input
 		
+	if not input.is_finite():
+		return Vector3.INF
+		
 	match value_type:
 		GUIDEAction.GUIDEActionValueType.BOOL, GUIDEAction.GUIDEActionValueType.AXIS_1D:
 			return Vector3(_rescale(input.x), input.y, input.z)

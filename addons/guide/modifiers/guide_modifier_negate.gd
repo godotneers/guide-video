@@ -39,6 +39,9 @@ func _update_caches():
 		
 
 func _modify_input(input:Vector3, delta:float, value_type:GUIDEAction.GUIDEActionValueType) -> Vector3:
+	if not input.is_finite():
+		return Vector3.INF
+		
 	return input * _multiplier
 
 func _editor_name() -> String:

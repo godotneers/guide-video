@@ -5,6 +5,7 @@ class_name GUIDEInputFormatter
 const IconMaker = preload("icon_maker/icon_maker.gd")
 const KeyRenderer = preload("renderers/keyboard/key_renderer.tscn")
 const MouseRenderer = preload("renderers/mouse/mouse_renderer.tscn")
+const TouchRenderer = preload("renderers/touch/touch_renderer.tscn")
 const JoyRenderer = preload("renderers/joy/joy_renderer.tscn")
 const XboxRenderer = preload("renderers/controllers/xbox/xbox_controller_renderer.tscn")
 const PlayStationRenderer = preload("renderers/controllers/playstation/playstation_controller_renderer.tscn")
@@ -49,6 +50,7 @@ static func _ensure_readiness():
 	
 	add_icon_renderer(KeyRenderer.instantiate())
 	add_icon_renderer(MouseRenderer.instantiate())
+	add_icon_renderer(TouchRenderer.instantiate())
 	add_icon_renderer(ActionRenderer.instantiate())
 	add_icon_renderer(JoyRenderer.instantiate())
 	add_icon_renderer(XboxRenderer.instantiate())
@@ -64,9 +66,20 @@ static func _ensure_readiness():
 	_is_ready = true
 
 
-static func _cleanup():
+## This will clean up the rendering infrastructure used for generating 
+## icons. Note that in a normal game you will have no need to call this
+## as the infrastructure is needed throughout the run of your game.
+## It might be useful in tests though, to get rid of spurious warnings
+## about orphaned nodes.
+static func cleanup():
 	_is_ready = false
+		
+	# free all the nodes to avoid memory leaks
+	for renderer in _icon_renderers:
+		renderer.queue_free()
+		
 	_icon_renderers.clear()
+	
 	_text_providers.clear()
 	if is_instance_valid(_icon_maker):
 		_icon_maker.queue_free()
@@ -75,7 +88,6 @@ static func _cleanup():
 func _init(icon_size:int = 32, resolver:Callable = func(action) -> GUIDEActionMapping: return null ):
 	_icon_size = icon_size
 	_action_resolver = resolver
-	_ensure_readiness()
 
 
 ## Adds an icon renderer for rendering icons.
@@ -146,6 +158,7 @@ func input_as_text(input:GUIDEInput, materialize_actions:bool = true) -> String:
 
 ## Renders materialized input as text.
 func _materialized_as_text(input:MaterializedInput) -> String:
+	_ensure_readiness()
 	if input is MaterializedSimpleInput:
 		var text:String = ""
 		for provider in _text_providers:
@@ -154,7 +167,8 @@ func _materialized_as_text(input:MaterializedInput) -> String:
 				# first provider wins
 				break
 		if text == "":
-			push_warning("No formatter found for input ", input)
+			pass
+			## push_warning("No formatter found for input ", input)
 		return text
 
 	var separator = _separator_for_input(input)
@@ -169,6 +183,7 @@ func _materialized_as_text(input:MaterializedInput) -> String:
 			
 ## Renders materialized input as rich text.
 func _materialized_as_richtext_async(input:MaterializedInput) -> String:
+	_ensure_readiness()	
 	if input is MaterializedSimpleInput:
 		var icon:Texture2D = null
 		for renderer in _icon_renderers:

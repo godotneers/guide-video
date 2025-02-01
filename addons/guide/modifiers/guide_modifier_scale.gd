@@ -4,12 +4,23 @@ class_name GUIDEModifierScale
 extends GUIDEModifier
 
 ## The scale by which the input should be scaled.
-@export var scale:Vector3 = Vector3.ONE
+@export var scale:Vector3 = Vector3.ONE:
+	set(value):
+		scale = value
+		emit_changed()
+		
+		
 ## If true, delta time will be multiplied in addition to the scale.
-@export var apply_delta_time:bool = false
+@export var apply_delta_time:bool = false:
+	set(value):
+		apply_delta_time = value
+		emit_changed()
 
 
 func _modify_input(input:Vector3, delta:float, value_type:GUIDEAction.GUIDEActionValueType) -> Vector3:
+	if not input.is_finite():
+		return Vector3.INF
+		
 	if apply_delta_time:
 		return input * scale * delta
 	else:

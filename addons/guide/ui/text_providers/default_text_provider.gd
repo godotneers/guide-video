@@ -1,7 +1,10 @@
 extends GUIDETextProvider
 
+var _is_on_desktop:bool = false
+
 func _init():
 	priority = 0
+	_is_on_desktop = OS.has_feature("linuxbsd") or OS.has_feature("macos") or OS.has_feature("windows")
 	
 func supports(input:GUIDEInput) -> bool:
 	return true
@@ -30,7 +33,16 @@ func get_text(input:GUIDEInput) -> String:
 			var meta = GUIDEInputKey.new()
 			meta.key = KEY_META
 			result.append(get_text(meta))
-		result.append(_format(OS.get_keycode_string(DisplayServer.keyboard_get_label_from_physical(input.key))))
+		
+		var the_key = input.key
+		
+		# if we are on desktop, translate the physical keycode into the actual label
+		# this is not supported on mobile, so we have to check		
+		if _is_on_desktop:
+			the_key = DisplayServer.keyboard_get_label_from_physical(input.key)
+			
+		
+		result.append(_format(OS.get_keycode_string(the_key)))
 		return "+".join(result) 
 	
 	if input is GUIDEInputMouseAxis1D:
@@ -106,5 +118,24 @@ func get_text(input:GUIDEInput) -> String:
 			
 	if input is GUIDEInputMousePosition:
 		return _format(tr("Mouse Position"))
+		
+	if input is GUIDEInputTouchPosition:
+		return _format(tr("Touch Position %s") % [input.finger_index  if input.finger_index >= 0 else "Average"])
+
+	if input is GUIDEInputTouchAngle:
+		return _format(tr("Touch Angle"))
+		
+	if input is GUIDEInputTouchDistance:
+		return _format(tr("Touch Distance"))
+
+	if input is GUIDEInputTouchAxis1D:
+		match input.axis:
+			GUIDEInputTouchAxis1D.GUIDEInputTouchAxis.X:
+				_format(tr("Touch Left/Right %s") % [input.finger_index  if input.finger_index >= 0 else "Average"])
+			GUIDEInputTouchAxis1D.GUIDEInputTouchAxis.Y:
+				_format(tr("Touch Up/Down %s") % [input.finger_index  if input.finger_index >= 0 else "Average"])
+	
+	if input is GUIDEInputTouchAxis2D:
+		return _format(tr("Touch Axis 2D %s") % [input.finger_index  if input.finger_index >= 0 else "Average"])
 
 	return _format("??")

@@ -213,4 +213,4 @@ script = ExtResource("3_c6q6r")
 [connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/HBoxContainer/Select2DButton" to="." method="_on_select_2d_button_pressed"]
 [connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/HBoxContainer/Select3DButton" to="." method="_on_select_3d_button_pressed"]
 [connection signal="detection_started" from="InputDetector" to="." method="_on_input_detector_detection_started"]
-[connection signal="input_dectected" from="InputDetector" to="." method="_on_input_detector_input_dectected"]
+[connection signal="input_detected" from="InputDetector" to="." method="_on_input_detector_input_detected"]

@@ -66,6 +66,7 @@ func _show_inputs_of_value_type(type:GUIDEAction.GUIDEActionValueType) -> void:
 	if items.is_empty():
 		return
 		
+	items.sort_custom(func(a,b): return a._editor_name().nocasecmp_to(b._editor_name()) < 0)
 	Utils.clear(_available_types)
 	
 	for item in items:
@@ -104,7 +105,7 @@ func _on_input_detector_detection_started():
 	_instructions_label.text = tr("Actuate the input now...")
 
 
-func _on_input_detector_input_dectected(input:GUIDEInput):
+func _on_input_detector_input_detected(input:GUIDEInput):
 	_instructions_label.visible = false
 	_input_display.visible = true
 	_input_display.input = input

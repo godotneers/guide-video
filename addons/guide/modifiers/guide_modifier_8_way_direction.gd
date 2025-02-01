@@ -20,8 +20,13 @@ enum GUIDEDirection {
 @export var direction:GUIDEDirection = GUIDEDirection.EAST
 
 func _modify_input(input:Vector3, delta:float, value_type:GUIDEAction.GUIDEActionValueType) -> Vector3:
+	if not input.is_finite():
+		return Vector3.INF
+		
 	if input.is_zero_approx():
 		return Vector3.ZERO
+		
+	
 		
 	# get the angle in which the direction is pointing in radians.
 	var angle_radians = atan2( -input.y, input.x );

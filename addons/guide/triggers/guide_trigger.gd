@@ -16,7 +16,7 @@ enum GUIDETriggerType {
 	# If there are more than one explicit triggers at least one must trigger
 	# for the action to trigger.
 	EXPLICIT = 1,
-	# All implicit triggers must trigger for the action to triger.
+	# All implicit triggers must trigger for the action to trigger.
 	IMPLICIT = 2,
 	# All blocking triggers prevent the action from triggering.
 	BLOCKING = 3
@@ -48,15 +48,15 @@ func _is_actuated(input:Vector3, value_type:GUIDEAction.GUIDEActionValueType) ->
 
 ## Checks if a 1D input is actuated.
 func _is_axis1d_actuated(input:Vector3) -> bool:
-	return abs(input.x) > actuation_threshold
+	return is_finite(input.x) and abs(input.x) > actuation_threshold
 	
 ## Checks if a 2D input is actuated.
 func _is_axis2d_actuated(input:Vector3) -> bool:
-	return Vector2(input.x, input.y).length_squared() > actuation_threshold * actuation_threshold
+	return is_finite(input.x) and is_finite(input.y) and Vector2(input.x, input.y).length_squared() > actuation_threshold * actuation_threshold
 
 ## Checks if a 3D input is actuated.
 func _is_axis3d_actuated(input:Vector3) -> bool:
-	return input.length_squared() > actuation_threshold * actuation_threshold
+	return input.is_finite() and input.length_squared() > actuation_threshold * actuation_threshold
 	
 func _editor_name() -> String:
 	return "GUIDETrigger"

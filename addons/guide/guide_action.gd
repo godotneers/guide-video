@@ -4,10 +4,10 @@ class_name GUIDEAction
 extends Resource
 
 enum GUIDEActionValueType {
-	BOOL,
-	AXIS_1D,
-	AXIS_2D,
-	AXIS_3D
+	BOOL = 0,
+	AXIS_1D = 1,
+	AXIS_2D = 2,
+	AXIS_3D = 3
 }
 
 enum GUIDEActionState {
@@ -124,10 +124,13 @@ var value_axis_3d:Vector3:
 	
 
 var _elapsed_seconds:float
+## The amount of seconds elapsed since the action started evaluating.
 var elapsed_seconds:float:
 	get: return _elapsed_seconds
 
+
 var _triggered_seconds:float
+## The amount of seconds elapsed since the action triggered.
 var triggered_seconds:float:
 	get: return _triggered_seconds
 

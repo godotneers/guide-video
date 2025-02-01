@@ -1,3 +1,4 @@
+## Base class for joystick inputs.
 @tool
 class_name GUIDEInputJoyBase
 extends GUIDEInput

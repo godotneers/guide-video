@@ -32,6 +32,9 @@ func _modify_input(input: Vector3, delta: float, value_type: GUIDEAction.GUIDEAc
 		push_error("No curve added to Curve modifier.")
 		return input
 
+	if not input.is_finite():
+		return Vector3.INF
+
 	# Return vector with enabled axes modified, others remain unchanged.
 	return Vector3(
 		curve.sample(input.x) if x else input.x,
