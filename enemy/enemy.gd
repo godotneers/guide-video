@@ -4,10 +4,12 @@ extends Node3D
 
 var _target:Node3D
 var _delta:float
-@onready var _agent = %NavigationAgent3D
+@onready var _agent:NavigationAgent3D = %NavigationAgent3D
+var _waiting_for_navmesh_update:bool = false
 
 func _ready():
 	_prepare.call_deferred()
+	
 	
 func _prepare():
 	_target = get_tree().get_first_node_in_group("target")
@@ -20,6 +22,24 @@ func take_damage():
 	queue_free()
 
 func _physics_process(delta):
+	# smooth out the update over 100 frames so we don't get a huge spike
+	if NavigationServer3D.agent_is_map_changed(_agent.get_rid()):
+		_waiting_for_navmesh_update = true
+		
+		
+	if _waiting_for_navmesh_update:
+		if Engine.get_process_frames() % 100 != posmod(get_instance_id(), 100):
+			return
+		
+		_waiting_for_navmesh_update = false
+		# force recalculation of a new path
+		_agent.target_position = _target.global_position    
+		
+	
+	if _agent.is_navigation_finished() and _target != null:
+		_agent.target_position = _target.global_position
+		return
+	
 	if _agent.is_navigation_finished() and _target != null:
 		_agent.target_position = _target.global_position
 		return
