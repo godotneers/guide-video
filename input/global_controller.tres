@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=11 format=3 uid="uid://dssnfrtms1y6d"]
+
+[ext_resource type="Script" path="res://addons/guide/guide_mapping_context.gd" id="1_buehc"]
+[ext_resource type="Resource" uid="uid://beji85xe7m32l" path="res://input/switch_to_keyboard_and_mouse.tres" id="1_xw6mc"]
+[ext_resource type="Script" path="res://addons/guide/inputs/guide_input_any.gd" id="2_yf7cm"]
+[ext_resource type="Script" path="res://addons/guide/guide_input_mapping.gd" id="3_0jdth"]
+[ext_resource type="Script" path="res://addons/guide/triggers/guide_trigger_pressed.gd" id="4_ffmoa"]
+[ext_resource type="Script" path="res://addons/guide/guide_action_mapping.gd" id="4_us1ue"]
+
+[sub_resource type="Resource" id="Resource_4deht"]
+script = ExtResource("2_yf7cm")
+mouse_buttons = true
+mouse_movement = true
+joy_buttons = false
+joy_axes = false
+keyboard = true
+touch = false
+mouse = true
+joy = false
+
+[sub_resource type="Resource" id="Resource_v1ihi"]
+script = ExtResource("4_ffmoa")
+actuation_threshold = 0.5
+
+[sub_resource type="Resource" id="Resource_t5g43"]
+script = ExtResource("3_0jdth")
+override_action_settings = false
+is_remappable = false
+display_name = ""
+display_category = ""
+input = SubResource("Resource_4deht")
+modifiers = Array[Resource("res://addons/guide/modifiers/guide_modifier.gd")]([])
+triggers = Array[Resource("res://addons/guide/triggers/guide_trigger.gd")]([SubResource("Resource_v1ihi")])
+
+[sub_resource type="Resource" id="Resource_la66i"]
+script = ExtResource("4_us1ue")
+action = ExtResource("1_xw6mc")
+input_mappings = Array[ExtResource("3_0jdth")]([SubResource("Resource_t5g43")])
+
+[resource]
+script = ExtResource("1_buehc")
+display_name = ""
+mappings = Array[ExtResource("4_us1ue")]([SubResource("Resource_la66i")])
