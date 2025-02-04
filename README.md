@@ -1,4 +1,4 @@
-﻿# A G.U.I.D.E to input in Godot - Part 2: Controllers
+﻿# A G.U.I.D.E to input in Godot - Part 2: Mixed Input and Input Prompts
  
 <p align="center">
   <a href="https://youtu.be/gNiiaNViaUg">
