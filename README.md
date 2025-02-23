@@ -1,7 +1,7 @@
 ﻿# A G.U.I.D.E to input in Godot - Part 2: Mixed Input and Input Prompts
  
 <p align="center">
-  <a href="https://youtu.be/gNiiaNViaUg">
+  <a href="https://youtu.be/lEBYnQC-vJw">
 <img src="_assets/title_card.png" width="1280" alt="A G.U.I.D.E to input in Godot on YouTube Cover Image">
 </a> 
 </p>
