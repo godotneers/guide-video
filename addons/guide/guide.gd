@@ -33,6 +33,7 @@ var _reset_node:GUIDEReset
 
 
 func _ready():
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	_reset_node = GUIDEReset.new()
 	add_child(_reset_node)
 	# attach to the current viewport to get input events
