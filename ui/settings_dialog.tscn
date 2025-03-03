@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://1ss8677ov4ae"]
+
+[ext_resource type="Theme" uid="uid://dvfbc16nl7dl5" path="res://ui/game_theme.tres" id="1_x8jgv"]
+[ext_resource type="Script" path="res://ui/settings_dialog.gd" id="2_hvjw8"]
+[ext_resource type="Texture2D" uid="uid://dxegpfpbh82t7" path="res://icon.svg" id="3_lnv82"]
+
+[sub_resource type="Shader" id="Shader_lnx5d"]
+code = "shader_type canvas_item;
+
+void fragment() {
+	COLOR = mix(vec4(0.2, 0.2, 0.4, 1), vec4(0.1, 0.1, 0.1, 1), UV.y);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qgngo"]
+shader = SubResource("Shader_lnx5d")
+
+[node name="SettingsDialog" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_x8jgv")
+script = ExtResource("2_hvjw8")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_qgngo")
+layout_mode = 2
+texture = ExtResource("3_lnv82")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 30
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+tab_alignment = 1
+
+[node name="KeyboardMouse" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/TabContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+metadata/_tab_name = "Keyboard & Mouse"
+
+[node name="Controller" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/TabContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2

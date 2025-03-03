@@ -1,0 +1,6 @@
+[gd_resource type="Theme" format=3 uid="uid://dvfbc16nl7dl5"]
+
+[resource]
+HeaderLarge/font_sizes/font_size = 48
+HeaderMedium/font_sizes/font_size = 32
+HeaderMedium/font_sizes/normal_font_size = 32

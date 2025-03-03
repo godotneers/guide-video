@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3gb24c5ackyi"]
+
+[ext_resource type="Script" path="res://ui/input_binding.gd" id="1_v7bby"]
+
+[node name="InputBinding" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+script = ExtResource("1_v7bby")
+
+[node name="Title" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HeaderMedium"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="BoundInput" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_type_variation = &"HeaderMedium"
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
