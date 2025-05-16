@@ -31,10 +31,15 @@ var _actions_sharing_input:Dictionary = {}
 ## before new input is processed at the beginning of the frame.
 var _reset_node:GUIDEReset
 
+## The current input state. This is used to track the state of the inputs
+## and serves as a basis for the GUIDEInputs.
+var _input_state:GUIDEInputState
+
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_reset_node = GUIDEReset.new()
+	_input_state = GUIDEInputState.new()
 	add_child(_reset_node)
 	# attach to the current viewport to get input events
 	GUIDEInputTracker._instrument.call_deferred(get_viewport())
@@ -60,9 +65,12 @@ func _on_node_added(node:Node) -> void:
 func inject_input(event:InputEvent) -> void:
 	if event is InputEventAction:
 		return  # we don't react to Godot's built-in events
-	
-	for input:GUIDEInput in _active_inputs:
-		input._input(event)
+
+	# The input state is the sole consumer of input events. It will notify
+	# GUIDEInputs when relevant input events happen. This way we don't need
+	# to process input events multiple times and at the same time always have
+	# the full picture of the input state.
+	_input_state._input(event)
 
 
 ## Applies an input remapping config. This will override all input bindings in the 
@@ -225,6 +233,8 @@ func _update_caches():
 			# - it allows us to prioritize input, if two actions check for  
 			#   the same input. This way the first action can consume the
 			#   input and not have it affect further actions.
+			# - we make sure nobody shares triggers as they are stateful and
+			#   should not be shared.
 			
 			var effective_mapping  = GUIDEActionMapping.new()
 			effective_mapping.action = action
@@ -253,10 +263,16 @@ func _update_caches():
 						consolidated_inputs.add(bound_input)
 					
 				new_input_mapping.input = bound_input
-				# triggers and modifiers cannot be re-bound so we can just use the one
-				# from the original configuration
+				# modifiers cannot be re-bound so we can just use the one
+				# from the original configuration. this is also needed for shared
+				# modifiers to work.
 				new_input_mapping.modifiers = action_mapping.input_mappings[index].modifiers
-				new_input_mapping.triggers = action_mapping.input_mappings[index].triggers
+				# triggers also cannot be re-bound but we still make a copy 
+				# to ensure that no shared triggers exist.
+				new_input_mapping.triggers = []
+				
+				for trigger in action_mapping.input_mappings[index].triggers:
+					new_input_mapping.triggers.append(trigger.duplicate())
 				
 				new_input_mapping._initialize()
 				
@@ -334,19 +350,25 @@ func _update_caches():
 			if not blocked_actions.is_empty():
 				_actions_sharing_input[mapping.action] = blocked_actions.values()
 				
-	# finally collect which inputs we need to reset per frame
 	_reset_node._inputs_to_reset.clear()
 	for input:GUIDEInput in _active_inputs:
+		# finally collect which inputs we need to reset per frame
 		if input._needs_reset():
 			_reset_node._inputs_to_reset.append(input)
+
+		# Give the state to the input
+		input._state = _input_state		
 		# Notify inputs that GUIDE is about to use them
 		input._begin_usage()
 	
-	# notify modifiers they will be used.
 	for mapping in _active_action_mappings:
 		for input_mapping in mapping.input_mappings:
+			# notify modifiers they will be used.
 			for modifier in input_mapping.modifiers:
 				modifier._begin_usage()
+		
+			# and copy over the hold time threshold from the mapping
+			mapping.action._trigger_hold_threshold = input_mapping._trigger_hold_threshold
 		
 	# and notify interested parties that the input mappings have changed
 	input_mappings_changed.emit()
