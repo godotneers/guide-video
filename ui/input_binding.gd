@@ -1,4 +1,5 @@
 @tool
+class_name InputBinding
 extends HBoxContainer
 
 @onready var _title:Label = %Title

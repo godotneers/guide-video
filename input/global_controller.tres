@@ -11,8 +11,10 @@
 script = ExtResource("2_yf7cm")
 mouse_buttons = true
 mouse_movement = true
+minimum_mouse_movement_distance = 1.0
 joy_buttons = false
 joy_axes = false
+minimum_joy_axis_actuation_strength = 0.2
 keyboard = true
 touch = false
 mouse = true

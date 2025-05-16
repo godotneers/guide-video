@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=56 format=3 uid="uid://4nww50j03u7"]
+[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=57 format=3 uid="uid://4nww50j03u7"]
 
 [ext_resource type="Resource" uid="uid://1tvdmjdopt23" path="res://input/build_mode/switch_to_walk_mode.tres" id="1_xr3bq"]
 [ext_resource type="Script" path="res://addons/guide/inputs/guide_input_key.gd" id="2_v2ofc"]
 [ext_resource type="Script" path="res://addons/guide/guide_input_mapping.gd" id="3_yhj66"]
+[ext_resource type="Script" path="res://addons/guide/triggers/guide_trigger_released.gd" id="4_5nts0"]
 [ext_resource type="Script" path="res://addons/guide/triggers/guide_trigger_pressed.gd" id="4_elqo6"]
 [ext_resource type="Script" path="res://addons/guide/guide_action_mapping.gd" id="6_qwoyw"]
 [ext_resource type="Resource" uid="uid://djjhixt63m0sm" path="res://input/build_mode/select_tower.tres" id="7_udvco"]
@@ -26,10 +27,10 @@ shift = false
 control = false
 alt = false
 meta = false
-allow_additional_modifiers = false
+allow_additional_modifiers = true
 
-[sub_resource type="Resource" id="Resource_0xrlx"]
-script = ExtResource("4_elqo6")
+[sub_resource type="Resource" id="Resource_0et14"]
+script = ExtResource("4_5nts0")
 actuation_threshold = 0.5
 
 [sub_resource type="Resource" id="Resource_1fwkv"]
@@ -40,7 +41,7 @@ display_name = ""
 display_category = ""
 input = SubResource("Resource_c4jvm")
 modifiers = Array[Resource("res://addons/guide/modifiers/guide_modifier.gd")]([])
-triggers = Array[Resource("res://addons/guide/triggers/guide_trigger.gd")]([SubResource("Resource_0xrlx")])
+triggers = Array[Resource("res://addons/guide/triggers/guide_trigger.gd")]([SubResource("Resource_0et14")])
 
 [sub_resource type="Resource" id="Resource_83ce4"]
 script = ExtResource("6_qwoyw")
@@ -54,7 +55,7 @@ shift = false
 control = false
 alt = false
 meta = false
-allow_additional_modifiers = false
+allow_additional_modifiers = true
 
 [sub_resource type="Resource" id="Resource_jogl6"]
 script = ExtResource("4_elqo6")
@@ -128,7 +129,7 @@ shift = false
 control = false
 alt = false
 meta = false
-allow_additional_modifiers = false
+allow_additional_modifiers = true
 
 [sub_resource type="Resource" id="Resource_13gh5"]
 script = ExtResource("12_qa7td")
@@ -157,7 +158,7 @@ shift = false
 control = false
 alt = false
 meta = false
-allow_additional_modifiers = false
+allow_additional_modifiers = true
 
 [sub_resource type="Resource" id="Resource_psom4"]
 script = ExtResource("12_qa7td")
@@ -182,7 +183,7 @@ shift = false
 control = false
 alt = false
 meta = false
-allow_additional_modifiers = false
+allow_additional_modifiers = true
 
 [sub_resource type="Resource" id="Resource_l0kix"]
 script = ExtResource("13_45k2q")
@@ -205,7 +206,7 @@ shift = false
 control = false
 alt = false
 meta = false
-allow_additional_modifiers = false
+allow_additional_modifiers = true
 
 [sub_resource type="Resource" id="Resource_rra6d"]
 script = ExtResource("3_yhj66")

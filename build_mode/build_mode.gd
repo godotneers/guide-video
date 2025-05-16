@@ -25,7 +25,7 @@ var active:bool = false:
 		visible = active
 
 
-func _process(delta):
+func _process(_delta):
 	if not active:
 		return
 

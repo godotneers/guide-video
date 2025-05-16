@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=52 format=3 uid="uid://2yeex4w77ch8"]
+[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=53 format=3 uid="uid://2yeex4w77ch8"]
 
 [ext_resource type="Resource" uid="uid://1tvdmjdopt23" path="res://input/build_mode/switch_to_walk_mode.tres" id="1_2cbcw"]
 [ext_resource type="Script" path="res://addons/guide/inputs/guide_input_joy_button.gd" id="2_xbp62"]
 [ext_resource type="Script" path="res://addons/guide/guide_input_mapping.gd" id="3_5u03s"]
 [ext_resource type="Script" path="res://addons/guide/triggers/guide_trigger_pressed.gd" id="4_42koi"]
+[ext_resource type="Script" path="res://addons/guide/triggers/guide_trigger_released.gd" id="4_fhsqw"]
 [ext_resource type="Script" path="res://addons/guide/guide_action_mapping.gd" id="5_g65e6"]
 [ext_resource type="Resource" uid="uid://djjhixt63m0sm" path="res://input/build_mode/select_tower.tres" id="6_qtjw4"]
 [ext_resource type="Resource" uid="uid://bdgovsaqie57w" path="res://input/build_mode/place_tower.tres" id="7_5oyv0"]
@@ -22,10 +23,10 @@
 [sub_resource type="Resource" id="Resource_lscl3"]
 script = ExtResource("2_xbp62")
 button = 9
-joy_index = 0
+joy_index = -1
 
-[sub_resource type="Resource" id="Resource_0xrlx"]
-script = ExtResource("4_42koi")
+[sub_resource type="Resource" id="Resource_2jpl0"]
+script = ExtResource("4_fhsqw")
 actuation_threshold = 0.5
 
 [sub_resource type="Resource" id="Resource_1fwkv"]
@@ -36,8 +37,9 @@ display_name = ""
 display_category = ""
 input = SubResource("Resource_lscl3")
 modifiers = Array[Resource("res://addons/guide/modifiers/guide_modifier.gd")]([])
-triggers = Array[Resource("res://addons/guide/triggers/guide_trigger.gd")]([SubResource("Resource_0xrlx")])
+triggers = Array[Resource("res://addons/guide/triggers/guide_trigger.gd")]([SubResource("Resource_2jpl0")])
 metadata/_guide_modifiers_collapsed = false
+metadata/_guide_triggers_collapsed = false
 
 [sub_resource type="Resource" id="Resource_83ce4"]
 script = ExtResource("5_g65e6")
@@ -48,7 +50,7 @@ metadata/_guide_input_mappings_collapsed = false
 [sub_resource type="Resource" id="Resource_854oe"]
 script = ExtResource("2_xbp62")
 button = 11
-joy_index = 0
+joy_index = -1
 
 [sub_resource type="Resource" id="Resource_jogl6"]
 script = ExtResource("4_42koi")
@@ -73,7 +75,7 @@ metadata/_guide_input_mappings_collapsed = false
 [sub_resource type="Resource" id="Resource_h8ik5"]
 script = ExtResource("2_xbp62")
 button = 0
-joy_index = 0
+joy_index = -1
 
 [sub_resource type="Resource" id="Resource_e2pct"]
 script = ExtResource("4_42koi")
@@ -98,7 +100,7 @@ metadata/_guide_input_mappings_collapsed = false
 [sub_resource type="Resource" id="Resource_0qxpl"]
 script = ExtResource("2_xbp62")
 button = 1
-joy_index = 0
+joy_index = -1
 
 [sub_resource type="Resource" id="Resource_3kwhj"]
 script = ExtResource("4_42koi")
@@ -124,7 +126,7 @@ metadata/_guide_input_mappings_collapsed = false
 script = ExtResource("10_phms0")
 x = 0
 y = 1
-joy_index = 0
+joy_index = -1
 
 [sub_resource type="Resource" id="Resource_ubc2x"]
 script = ExtResource("11_76ej8")
@@ -155,7 +157,7 @@ metadata/_guide_input_mappings_collapsed = false
 script = ExtResource("10_phms0")
 x = 2
 y = 3
-joy_index = 0
+joy_index = -1
 
 [sub_resource type="Resource" id="Resource_ab0nb"]
 script = ExtResource("11_76ej8")
@@ -165,8 +167,10 @@ upper_threshold = 1.0
 [sub_resource type="Resource" id="Resource_vg3fd"]
 script = ExtResource("14_n83rd")
 initial_position = Vector2(0.5, 0.5)
-scale = Vector3(1, 1, 1)
+speed = Vector3(1, 1, 1)
+screen_scale = 1
 apply_delta_time = true
+scale = Vector3(1, 1, 1)
 
 [sub_resource type="Resource" id="Resource_hwo03"]
 script = ExtResource("15_nsqsc")
@@ -193,7 +197,7 @@ input_mappings = Array[ExtResource("3_5u03s")]([SubResource("Resource_usmgk")])
 script = ExtResource("10_phms0")
 x = 2
 y = 3
-joy_index = 0
+joy_index = -1
 
 [sub_resource type="Resource" id="Resource_ykwvo"]
 script = ExtResource("11_76ej8")
@@ -203,8 +207,10 @@ upper_threshold = 1.0
 [sub_resource type="Resource" id="Resource_pp8oa"]
 script = ExtResource("14_n83rd")
 initial_position = Vector2(0.5, 0.5)
-scale = Vector3(1, 1, 1)
+speed = Vector3(1, 1, 1)
+screen_scale = 1
 apply_delta_time = true
+scale = Vector3(1, 1, 1)
 
 [sub_resource type="Resource" id="Resource_ktvv8"]
 script = ExtResource("17_75j7o")

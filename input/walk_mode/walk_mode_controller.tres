@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=42 format=3 uid="uid://cpes68yhwrtsg"]
+[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=43 format=3 uid="uid://cpes68yhwrtsg"]
 
 [ext_resource type="Resource" uid="uid://b6yqgtekcyp68" path="res://input/walk_mode/move.tres" id="1_vg1xt"]
 [ext_resource type="Script" path="res://addons/guide/inputs/guide_input_joy_axis_2d.gd" id="2_mn3ym"]
@@ -15,13 +15,14 @@
 [ext_resource type="Script" path="res://addons/guide/triggers/guide_trigger_pressed.gd" id="14_hbkpb"]
 [ext_resource type="Script" path="res://addons/guide/inputs/guide_input_joy_button.gd" id="15_3mcet"]
 [ext_resource type="Resource" uid="uid://7je87pcb5mct" path="res://input/walk_mode/switch_to_build_mode.tres" id="15_4qbv0"]
+[ext_resource type="Script" path="res://addons/guide/triggers/guide_trigger_released.gd" id="16_lpaxb"]
 [ext_resource type="Script" path="res://addons/guide/guide_mapping_context.gd" id="16_x2ltq"]
 
 [sub_resource type="Resource" id="Resource_upr1o"]
 script = ExtResource("2_mn3ym")
 x = 0
 y = 1
-joy_index = 0
+joy_index = -1
 
 [sub_resource type="Resource" id="Resource_ur3l8"]
 script = ExtResource("4_h1m54")
@@ -51,7 +52,7 @@ metadata/_guide_input_mappings_collapsed = false
 [sub_resource type="Resource" id="Resource_8iyi8"]
 script = ExtResource("8_mkw6v")
 axis = 2
-joy_index = 0
+joy_index = -1
 
 [sub_resource type="Resource" id="Resource_6eyu4"]
 script = ExtResource("4_p38ac")
@@ -125,7 +126,7 @@ metadata/_guide_input_mappings_collapsed = false
 [sub_resource type="Resource" id="Resource_7pwfg"]
 script = ExtResource("8_mkw6v")
 axis = 5
-joy_index = 0
+joy_index = -1
 
 [sub_resource type="Resource" id="Resource_lcro2"]
 script = ExtResource("14_hbkpb")
@@ -150,10 +151,10 @@ metadata/_guide_input_mappings_collapsed = false
 [sub_resource type="Resource" id="Resource_tdywi"]
 script = ExtResource("15_3mcet")
 button = 9
-joy_index = 0
+joy_index = -1
 
-[sub_resource type="Resource" id="Resource_030rc"]
-script = ExtResource("14_hbkpb")
+[sub_resource type="Resource" id="Resource_qxnp5"]
+script = ExtResource("16_lpaxb")
 actuation_threshold = 0.5
 
 [sub_resource type="Resource" id="Resource_0crjq"]
@@ -164,7 +165,7 @@ display_name = ""
 display_category = ""
 input = SubResource("Resource_tdywi")
 modifiers = Array[Resource("res://addons/guide/modifiers/guide_modifier.gd")]([])
-triggers = Array[Resource("res://addons/guide/triggers/guide_trigger.gd")]([SubResource("Resource_030rc")])
+triggers = Array[Resource("res://addons/guide/triggers/guide_trigger.gd")]([SubResource("Resource_qxnp5")])
 
 [sub_resource type="Resource" id="Resource_gsec0"]
 script = ExtResource("6_e7642")

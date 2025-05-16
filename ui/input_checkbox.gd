@@ -1,4 +1,5 @@
 @tool
+class_name InputCheckbox
 extends HBoxContainer
 
 signal toggled(new_value:bool)

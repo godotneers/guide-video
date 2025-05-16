@@ -1,4 +1,5 @@
 @tool
+class_name InputSlider
 extends HBoxContainer
 
 signal changed(new_value:int)

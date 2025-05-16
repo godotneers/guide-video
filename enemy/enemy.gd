@@ -53,5 +53,5 @@ func _on_agent_velocity_computed(safe:Vector3):
 	global_position += safe * _delta
 	
 	
-func _on_area_3d_body_entered(body):
+func _on_area_3d_body_entered(_body):
 	queue_free()

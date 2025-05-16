@@ -1,4 +1,5 @@
 @tool
+class_name InputSection
 extends PanelContainer
 
 @onready var _title:Label = %Title

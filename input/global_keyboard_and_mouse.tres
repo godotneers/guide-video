@@ -11,8 +11,10 @@
 script = ExtResource("2_gh8xk")
 mouse_buttons = false
 mouse_movement = false
+minimum_mouse_movement_distance = 1.0
 joy_buttons = true
 joy_axes = true
+minimum_joy_axis_actuation_strength = 0.2
 keyboard = false
 touch = false
 mouse = false

@@ -13,7 +13,7 @@ extends CharacterBody3D
 func _ready():
 	shoot.triggered.connect(_fire_magic_bolt)
 
-func _process(delta:float) -> void:
+func _process(_delta:float) -> void:
 	velocity = basis * move.value_axis_3d * movement_speed
 	rotation_degrees.y += rotate_player.value_axis_1d
 	
