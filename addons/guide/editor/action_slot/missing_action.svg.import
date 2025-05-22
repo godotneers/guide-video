@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqxly0g8pftxa"
-path="res://.godot/imported/Mouse_Side_Key_2_Light.png-3a47028a83b486166e55c8b465b98934.ctex"
+uid="uid://cdi5eoc1e8ha0"
+path="res://.godot/imported/missing_action.svg-31774fd8d1b787aab90de376faa436ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/guide/ui/renderers/mouse/icons/Mouse_Side_Key_2_Light.png"
-dest_files=["res://.godot/imported/Mouse_Side_Key_2_Light.png-3a47028a83b486166e55c8b465b98934.ctex"]
+source_file="res://addons/guide/editor/action_slot/missing_action.svg"
+dest_files=["res://.godot/imported/missing_action.svg-31774fd8d1b787aab90de376faa436ea.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

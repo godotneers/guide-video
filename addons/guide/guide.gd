@@ -215,8 +215,17 @@ func _update_caches():
 
 	for entry:Dictionary in sorted_contexts:
 		var context:GUIDEMappingContext = entry.context
+		var position:int = 0
 		for action_mapping:GUIDEActionMapping in context.mappings:
+			position += 1
 			var action := action_mapping.action
+			
+			# Mapping may be misconfigured, so we need to handle the case
+			# that the action is missing.
+			if action == null:
+				push_warning("Mapping at position %s in context %s has no action set. This mapping will be ignored." % [position, context.resource_path])
+				continue
+			
 			# If the action was already configured in a higher priority context,
 			# we'll skip it.
 			if processed_actions.has(action):
@@ -284,6 +293,8 @@ func _update_caches():
 			# action mappings
 			if not effective_mapping.input_mappings.is_empty():
 				_active_action_mappings.append(effective_mapping)
+
+	# INVARIANT: all _active_action_mappings now have actions.
 
 	# now we have a new set of active inputs		
 	for input:GUIDEInput in consolidated_inputs.values():

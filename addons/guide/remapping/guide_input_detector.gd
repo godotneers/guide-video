@@ -217,9 +217,15 @@ func _input(event:InputEvent) -> void:
 	# feed the event into the state
 	_input_state._input(event)
 
-	# while detecting, we're the only ones consuming input
+	# while detecting, we're the only ones consuming input and we eat this input
+	# to not accidentally trigger built-in Godot mappings (e.g. UI stuff)
 	get_viewport().set_input_as_handled()
-	
+	# but we still feed it into GUIDE's global state so this state stays 
+	# up to date. This should have no effect because we disabled all mapping
+	# contexts.
+	if not Engine.is_editor_hint():
+		GUIDE.inject_input(event)	
+
 	if _status == DetectionState.DETECTING:
 		# check if any abort input will trigger
 		for input in abort_detection_on:
