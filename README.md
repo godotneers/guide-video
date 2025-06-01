@@ -1,4 +1,4 @@
-﻿# A G.U.I.D.E to input in Godot - Part 2: Mixed Input and Input Prompts
+﻿# A G.U.I.D.E to input in Godot - Part 3: Remapping Controls
  
 <p align="center">
   <a href="https://youtu.be/lEBYnQC-vJw">
@@ -13,8 +13,8 @@ There is a `start` branch that contains the code as it was at the beginning of t
 
 The `main` branch contains the code as it was at the end of the video. If you don't know how to use git, you can also download the code as a zip file using these links:
 
-- [Download the code as a zip file (main branch, at the end of the video)](https://github.com/godotneers/guide-video/archive/refs/heads/part2.zip)
-- [Download the code as a zip file (start branch, at the beginning of the video)](https://github.com/godotneers/guide-video/archive/refs/heads/part2-start.zip)
+- [Download the code as a zip file (at the end of the video)](https://github.com/godotneers/guide-video/archive/refs/heads/part3.zip)
+- [Download the code as a zip file (at the beginning of the video)](https://github.com/godotneers/guide-video/archive/refs/heads/part3-start.zip)
 
 ## Support me
 
