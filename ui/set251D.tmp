@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://1ss8677ov4ae"]
+[gd_scene load_steps=13 format=3 uid="uid://1ss8677ov4ae"]
 
 [ext_resource type="Theme" uid="uid://dvfbc16nl7dl5" path="res://ui/game_theme.tres" id="1_x8jgv"]
 [ext_resource type="Script" path="res://ui/settings_dialog.gd" id="2_hvjw8"]
@@ -10,9 +10,6 @@
 [ext_resource type="Resource" uid="uid://cpes68yhwrtsg" path="res://input/walk_mode/walk_mode_controller.tres" id="6_tpeum"]
 [ext_resource type="Resource" uid="uid://4nww50j03u7" path="res://input/build_mode/build_mode_keyboard_and_mouse.tres" id="7_yphdr"]
 [ext_resource type="Resource" uid="uid://2yeex4w77ch8" path="res://input/build_mode/build_mode_controller.tres" id="8_jlb8y"]
-[ext_resource type="Script" path="res://addons/guide/remapping/guide_input_detector.gd" id="11_a8e3q"]
-[ext_resource type="Script" path="res://addons/guide/inputs/guide_input_key.gd" id="12_3jiuo"]
-[ext_resource type="Script" path="res://addons/guide/inputs/guide_input_joy_button.gd" id="13_8dmfm"]
 
 [sub_resource type="Shader" id="Shader_lnx5d"]
 code = "shader_type canvas_item;
@@ -24,23 +21,6 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qgngo"]
 shader = SubResource("Shader_lnx5d")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ry32"]
-bg_color = Color(0.140447, 0.140447, 0.140447, 1)
-
-[sub_resource type="Resource" id="Resource_pa8aq"]
-script = ExtResource("12_3jiuo")
-key = 4194308
-shift = false
-control = false
-alt = false
-meta = false
-allow_additional_modifiers = true
-
-[sub_resource type="Resource" id="Resource_vla06"]
-script = ExtResource("13_8dmfm")
-button = 4
-joy_index = -1
 
 [node name="SettingsDialog" type="MarginContainer"]
 process_mode = 3
@@ -100,33 +80,3 @@ metadata/_tab_name = "Keyboard & Mouse"
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-
-[node name="InputPrompt" type="MarginContainer" parent="."]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-mouse_filter = 0
-
-[node name="CenterContainer" type="CenterContainer" parent="InputPrompt"]
-layout_mode = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="InputPrompt/CenterContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_5ry32")
-
-[node name="MarginContainer" type="MarginContainer" parent="InputPrompt/CenterContainer/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 50
-
-[node name="Label" type="Label" parent="InputPrompt/CenterContainer/PanelContainer/MarginContainer"]
-layout_mode = 2
-theme_type_variation = &"HeaderLarge"
-text = "Actuate the control now"
-
-[node name="InputDetector" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("11_a8e3q")
-abort_detection_on = Array[Resource("res://addons/guide/inputs/guide_input.gd")]([SubResource("Resource_pa8aq"), SubResource("Resource_vla06")])

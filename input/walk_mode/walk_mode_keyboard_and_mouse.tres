@@ -39,9 +39,9 @@ order = 1
 
 [sub_resource type="Resource" id="Resource_13o88"]
 script = ExtResource("5_rbq3k")
-override_action_settings = false
-is_remappable = false
-display_name = ""
+override_action_settings = true
+is_remappable = true
+display_name = "Forward"
 display_category = ""
 input = SubResource("Resource_ybwic")
 modifiers = Array[Resource("res://addons/guide/modifiers/guide_modifier.gd")]([SubResource("Resource_ivx4u"), SubResource("Resource_21ait")])
@@ -64,9 +64,9 @@ z = true
 
 [sub_resource type="Resource" id="Resource_xa78n"]
 script = ExtResource("5_rbq3k")
-override_action_settings = false
-is_remappable = false
-display_name = ""
+override_action_settings = true
+is_remappable = true
+display_name = "Left"
 display_category = ""
 input = SubResource("Resource_bcoap")
 modifiers = Array[Resource("res://addons/guide/modifiers/guide_modifier.gd")]([SubResource("Resource_rslw4")])
@@ -87,9 +87,9 @@ order = 1
 
 [sub_resource type="Resource" id="Resource_lbojs"]
 script = ExtResource("5_rbq3k")
-override_action_settings = false
-is_remappable = false
-display_name = ""
+override_action_settings = true
+is_remappable = true
+display_name = "Backward"
 display_category = ""
 input = SubResource("Resource_dogm6")
 modifiers = Array[Resource("res://addons/guide/modifiers/guide_modifier.gd")]([SubResource("Resource_3qboj")])
@@ -106,9 +106,9 @@ allow_additional_modifiers = true
 
 [sub_resource type="Resource" id="Resource_jdetv"]
 script = ExtResource("5_rbq3k")
-override_action_settings = false
-is_remappable = false
-display_name = ""
+override_action_settings = true
+is_remappable = true
+display_name = "Right"
 display_category = ""
 input = SubResource("Resource_sdvjp")
 modifiers = Array[Resource("res://addons/guide/modifiers/guide_modifier.gd")]([])

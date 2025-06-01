@@ -2,6 +2,7 @@ extends Node3D
 
 @export var switch_to_build_mode:GUIDEAction
 @export var switch_to_walk_mode:GUIDEAction
+@export var toggle_settings_dialog:GUIDEAction
 
 @onready var _third_person_camera:ThirdPersonCamera = %ThirdPersonCamera
 @onready var _overhead_camera:OverheadCamera = %OverheadCamera
@@ -11,8 +12,12 @@ extends Node3D
 func _ready():
 	switch_to_build_mode.triggered.connect(_switch_to_build_mode)
 	switch_to_walk_mode.triggered.connect(_switch_to_walk_mode)
+	toggle_settings_dialog.triggered.connect(_toggle_settings_dialog)
 	
 	_switch_to_walk_mode()
+	
+func _toggle_settings_dialog():
+	get_tree().paused = not get_tree().paused	
 	
 func _switch_to_build_mode():
 	_overhead_camera.active = true

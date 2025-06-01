@@ -14,6 +14,10 @@ extends Node
 @export var switch_to_controller:GUIDEAction
 @export var switch_to_keyboard_and_mouse:GUIDEAction
 
+@export var toggle_settings_dialog:GUIDEAction
+
+var _in_settings:bool = false
+
 enum GameMode {
 	BUILD_MODE,
 	WALK_MODE
@@ -33,7 +37,13 @@ func _ready():
 	switch_to_controller.triggered.connect(_set_input_mode.bind(InputMode.CONTROLLER))
 	switch_to_keyboard_and_mouse.triggered.connect(_set_input_mode.bind(InputMode.KEYBOARD_AND_MOUSE))
 	
+	toggle_settings_dialog.triggered.connect(_toggle_settings)
+	GUIDE.set_remapping_config(RemappingConfiguration.get_current())
 	_update_input()
+	
+func _toggle_settings():
+	_in_settings = not _in_settings
+	_update_input()	
 	
 func _set_game_mode(mode:GameMode):
 	_game_mode = mode
@@ -51,6 +61,11 @@ func _update_input():
 	match _input_mode:
 		InputMode.KEYBOARD_AND_MOUSE:
 			GUIDE.enable_mapping_context(global_keyboard_and_mouse, true)
+
+			if _in_settings:
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+				return
+								
 			match _game_mode:
 				GameMode.BUILD_MODE:
 					Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -60,6 +75,10 @@ func _update_input():
 		
 		InputMode.CONTROLLER:
 			GUIDE.enable_mapping_context(global_controller, true)
+			
+			if _in_settings:
+				return 
+				
 			match _game_mode:
 				GameMode.BUILD_MODE:
 					GUIDE.enable_mapping_context(build_mode_controller)

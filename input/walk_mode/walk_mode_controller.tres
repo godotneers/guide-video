@@ -35,7 +35,7 @@ upper_threshold = 1.0
 
 [sub_resource type="Resource" id="Resource_4g1qm"]
 script = ExtResource("5_wxq12")
-override_action_settings = false
+override_action_settings = true
 is_remappable = false
 display_name = ""
 display_category = ""

@@ -2,7 +2,9 @@
 class_name InputBinding
 extends HBoxContainer
 
-@onready var _title:Label = %Title
+signal binding_change_requested()
+
+@onready var _title:Button = %TitleButton
 @onready var _bound_input:RichTextLabel = %BoundInput
 
 @export var title:String:
@@ -18,7 +20,8 @@ extends HBoxContainer
 		
 func _ready():
 	_refresh()	
-
+	_title.pressed.connect(func(): binding_change_requested.emit())
+	
 
 func _refresh():
 	if not is_node_ready():
