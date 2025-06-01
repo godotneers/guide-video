@@ -1,7 +1,7 @@
 ﻿# A G.U.I.D.E to input in Godot - Part 3: Remapping Controls
  
 <p align="center">
-  <a href="https://youtu.be/lEBYnQC-vJw">
+  <a href="https://youtu.be/RCKqouD9bPI">
 <img src="_assets/title_card.png" width="1280" alt="A G.U.I.D.E to input in Godot on YouTube Cover Image">
 </a> 
 </p>
