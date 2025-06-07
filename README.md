@@ -9,12 +9,12 @@
 Hello, Godotneers! Thank you very much for watching this video. This repository contains the example project, that we used in the video. You can use it to follow along with the video or to experiment on your own.
 
 ## Using this repository
-There is a `start` branch that contains the code as it was at the beginning of the video. You can use this branch to follow along with the video if you'd like.
+There is a `part1-start` branch that contains the code as it was at the beginning of the video. You can use this branch to follow along with the video if you'd like.
 
-The `main` branch contains the code as it was at the end of the video. If you don't know how to use git, you can also download the code as a zip file using these links:
+The `part1` branch contains the code as it was at the end of the video. If you don't know how to use git, you can also download the code as a zip file using these links:
 
-- [Download the code as a zip file (main branch, at the end of the video)](https://github.com/godotneers/guide-video/archive/refs/heads/main.zip)
-- [Download the code as a zip file (start branch, at the beginning of the video)](https://github.com/godotneers/guide-video/archive/refs/heads/start.zip)
+- [Download the code as a zip file (part1 branch, at the end of the video)](https://github.com/godotneers/guide-video/archive/refs/heads/part1.zip)
+- [Download the code as a zip file (part1-start branch, at the beginning of the video)](https://github.com/godotneers/guide-video/archive/refs/heads/part1-start.zip)
 
 ## Support me
 
